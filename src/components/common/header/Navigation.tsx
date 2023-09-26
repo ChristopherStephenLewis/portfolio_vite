@@ -1,8 +1,24 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Bars3Icon } from '@heroicons/react/24/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 function Navigation() {
+    const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsNavbarOpen(!isNavbarOpen);
+    };
+
     return (
-        <nav className=" bg-gray-900 flex sm:justify-between justify-center p-3 max-w-screen-xl flex-wrap items-center">
+        <nav className=" bg-gray-900 flex justify-between p-3 max-w-screen-xl flex-wrap items-center">
+            <button onClick={toggleNavbar} className="sm:hidden flex items-center">
+                {isNavbarOpen ? (
+                    <XMarkIcon className="h-6 w-6 text-gray-200" />
+                ) : (
+                    <Bars3Icon className="h-6 w-6 text-gray-200" />
+                )}
+            </button>
             <div className="sm:flex">
                 <Link to="/" className="flex">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-8" />
@@ -11,6 +27,7 @@ function Navigation() {
                     </span>
                 </Link>
             </div>
+            <div className="sm:hidden"></div>
             <ul className="sm:flex hidden">
                 <li className="text-gray-200 hover:text-yellow-500 pl-3 pr-3 py-2 relative inline-block group">
                     <Link to="/about">About</Link>
